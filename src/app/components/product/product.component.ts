@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { ProductResponseModel } from 'src/app/models/productResponseModel';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -9,19 +9,37 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent {
-  constructor(private productService:ProductService) {}
-  dataLoaded = false
+  constructor(
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute
+  ) {}
+  dataLoaded = false;
 
   products: Product[] = [];
 
   ngOnInit(): void {
-    this.getProducts();
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['categoryId']) {
+        this.getProductsByCategory(params['categoryId']);
+      } else {
+        this.getProducts();
+      }
+    });
   }
 
   getProducts() {
-    this.productService.getProducts().subscribe(response=>{
-      this.products = response.data
-      this.dataLoaded = true
-    })
+    this.productService.getProducts().subscribe((response) => {
+      this.products = response.data;
+      this.dataLoaded = true;
+    });
+  }
+
+  getProductsByCategory(categoryId: number) {
+    this.productService
+      .getProductsByCategory(categoryId)
+      .subscribe((response) => {
+        this.products = response.data;
+        this.dataLoaded = true;
+      });
   }
 }
