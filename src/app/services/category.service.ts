@@ -1,8 +1,8 @@
+import { ListResponseModel } from '../models/listResponseModel';
+import { Category } from '../models/category';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ListResponseModel } from '../models/ListResponseModel';
-import { Category } from '../models/category';
 
 @Injectable({
   providedIn: 'root',

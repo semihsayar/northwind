@@ -10,7 +10,7 @@ import { CategoryService } from 'src/app/services/category.service';
 export class CategoryComponent implements OnInit {
   categories: Category[] = [];
   currentCategory: Category;
-  defaultCategory:Category;
+  defaultCategory: Category;
   constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
@@ -23,25 +23,23 @@ export class CategoryComponent implements OnInit {
     });
   }
   setCurrentCategory(category: Category) {
-    this.currentCategory = category
+    this.currentCategory = category;
   }
-  getCurrentCategoryClass(category:Category){
-    if(category == this.currentCategory){
-      return "list-group-item active"
-    }
-    else{
-      return "list-group-item"
-    }
-  }
-  getAllCategoryClass(){
-    if(!this.currentCategory){
-      return "list-group-item active"
-    }
-    else{
-      return "list-group-item"
+  getCurrentCategoryClass(category: Category) {
+    if (category == this.currentCategory) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
     }
   }
-  clearCurrentCategory(){
+  getAllCategoryClass() {
+    if (!this.currentCategory) {
+      return 'list-group-item active';
+    } else {
+      return 'list-group-item';
+    }
+  }
+  clearCurrentCategory() {
     this.currentCategory = this.defaultCategory;
-   }
+  }
 }
